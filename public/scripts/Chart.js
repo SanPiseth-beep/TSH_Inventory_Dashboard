@@ -22,7 +22,7 @@
       {
         name: 'Sale',
         data: saleData,
-        color: '#28a745',
+        color: '#9FA6B2',
       },
       {
         name: 'Inventory',
@@ -32,7 +32,7 @@
     ],
   };
 
-  Highcharts.chart('chartContainer', options);
+  Highcharts.chart('saleVsInventory', options);
 
 
 // <!-- Stock Movement pie chart (GRN) -->
@@ -58,7 +58,7 @@
     { name: '22020721', y: 3 },
     { name: '22120148', y: 2 },
     { name: '22120150', y: 2 },
-    { name: 'Else', y: 986 },
+    { name: 'Other', y: 986 },
 
   ];
 
@@ -101,7 +101,7 @@
     { name: '23030152', y: 22 },
     { name: '22071218', y: 19 },
     { name: '22120148', y: 17 },
-    { name: 'Else', y: 2332 },
+    { name: 'Other', y: 2332 },
 
   ];
 
@@ -162,9 +162,7 @@
     { name: 'Makino', y: 6531132 },
     { name: 'Mazak', y: 622454 },
     { name: 'NO', y: 18682 },
-    { name: 'Sysmac', y: 224123 },
-    { name: 'Else', y: 8163441 },
-
+    { name: 'Sysmac', y: 224123 }
   ];
 
   var options = {
