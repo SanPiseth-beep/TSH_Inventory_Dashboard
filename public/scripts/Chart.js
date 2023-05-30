@@ -67,11 +67,11 @@
       type: 'pie',
     },
     title: {
-      text: 'Work Order vs Stock count (GRN)',
+      text: 'GRN VS WO',
     },
     series: [
       {
-        name: 'Parts count',
+        name: 'Amount of Stock in',
         data: grnChartData,
       },
     ],
@@ -110,11 +110,11 @@
       type: 'pie',
     },
     title: {
-      text: 'Work Order vs Stock count (MIV)',
+      text: 'MIV VS WO',
     },
     series: [
       {
-        name: 'Parts count',
+        name: 'Amount of Stock out',
         data: mivChartData,
       },
     ],
@@ -123,21 +123,25 @@
 // <!-- Non moving chart -->
 
  const nonMovingChartData = [
-    { name: '1206220', y: 137230 },
-    { name: 'CF240.02.03', y: 85254 },
-    { name: 'QT200-COM-EXTCABLE', y: 40824 },
-    { name: 'MR-25M', y: 40263 },
-    { name: 'MR-20M', y: 26369 },
-    { name: 'Else', y: 8733500, color: '#5cb85c' },
+    { name: '1206220', y: 137230 , customer: 'MAKINO'},
+    { name: 'CF240.02.03', y: 85254 , customer: 'MAKINO'},
+    { name: 'QT200-COM-EXTCABLE', y: 40824, customer: 'MAZAK' },
+    { name: 'MR-25M', y: 40263, customer: 'MAKINO' },
+    { name: 'MR-20M', y: 26369, customer: 'MAKINO' },
 
   ];
 
-  Highcharts.chart('nonMovingChart', {
+  var nonMovingChart = {
     chart: {
       type: 'pie',
     },
+    tooltip: {
+      formatter: function() {
+        return 'Stock Values:  <b>' + this.point.y + '</b><br> Customer:  <b>' + this.point.customer +'</b>';
+      }
+    },
     title: {
-      text: 'Non Moving',
+      text: 'Top 5 Non Moving Stock',
     },
     series: [
       {
@@ -145,9 +149,10 @@
         data: nonMovingChartData,
       },
     ],
-  });
+  }
+  Highcharts.chart('nonMovingChart', nonMovingChart);
 
-// Total inventory by category
+  // Total inventory by category
 
   const totalInventoryByCategory= [
     { name: 'Asti', y: 37160 },
@@ -167,7 +172,7 @@
     type: 'pie'
   },
   title: {
-    text: 'Total Inventory by Customer'
+    text: 'by Customer'
   },
   series: [{
     name: 'Stock Count',
@@ -208,7 +213,7 @@
     type: 'pie'
   },
   title: {
-    text: 'Total Inventory by Category'
+    text: 'by Category'
   },
   series: [{
     name: 'Stock Count',
