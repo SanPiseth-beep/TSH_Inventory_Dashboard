@@ -183,10 +183,10 @@
   }]
   };
 
-//   inventory by category 
   Highcharts.chart('inventoryByCategory', options);
 
-    const totalInventoryByCustomer= [
+//   inventory by Customer
+  const totalInventoryByCustomer= [
     { name: 'FAB PART', y: 88005 },
     { name: 'FAB PART-BB OS', y: 11150 },
     { name: 'FG-COHU', y: 0 },
@@ -203,7 +203,6 @@
     { name: 'HARDWARE/ACCESSORIES', y: 39859 },
     { name: 'PACKING MATERIAL', y: 15113 },
     { name: 'PROD CONSUMABLE', y: 14903 },
-
   ];
 
   var options = {
@@ -225,3 +224,4 @@
   };
 
   Highcharts.chart('inventoryByCustomer', options);
+
