@@ -361,11 +361,11 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 <div class="row text-center">
                   <div class="col-sm-12 col-md-6 col-lg-6">
                     <h5>GRN</h5>
-                    <p style="font-size: 1.2rem;">RM 1,081</p>
+                    <p class="GRN-tooltip" data-toggle="GRN-tooltip" style="font-size: 1.2rem;">RM 1,081</p>
                   </div>
                   <div class="col-sm-12 col-md-6 col-lg-6">
                     <h5>MIV</h5>
-                    <p style="font-size: 1.2rem;">RM 3,162</p>
+                    <p class="MIV-tooltip" data-toggle="MIV-tooltip" style="font-size: 1.2rem;">RM 3,162</p>
                   </div>
                 </div>
                 <div class="row text-center mt-5">
@@ -380,13 +380,15 @@ scratch. This page gets rid of all links and provides the needed markup only.
                 </div>
                 <hr class="my-4">
                 <div class="row mt-3">
-                  <div class="col-sm-12 col-md-12 col-lg-12">
-                    <div id="workOrderCountGRN"></div>
+                  <div class="col-sm-12 col-md-12 col-lg-12 d-flex flex-column align-items-end">
+                    <button  style="display: none;" type="button" id="btn-close-GRN" class="btn-close-GRN" data-bs-dismiss="GRNchart"><i class="fa fa-times"></i></button>
+                    <div id="workOrderCountGRN" style="display: none;"></div>
                   </div>
                 </div>
                 <div class="row mt-3">
-                  <div class="col-sm-12 col-md-12 col-lg-12">
-                    <div id="workOrderCountMIV"></div>
+                  <div class="col-sm-12 col-md-12 col-lg-12 d-flex flex-column align-items-end">
+                    <button style="display: none;" type="button" id="btn-close-MIV" class="btn-close-MIV" data-bs-dismiss="MIVchart"><i class="fa fa-times" ></i></button>
+                    <div id="workOrderCountMIV" style="display: none;"></div>
                   </div>
                 </div>
               </div>
@@ -413,10 +415,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <!-- Grn modal -->
-  <div class="modal" id="grnModal">
-    <div></div>
-  </div>
+
   <!-- The modal -->
   <div class="modal" id="myModal">
     <div class="modal-dialog" style="max-width: 90%;">
@@ -571,27 +570,87 @@ scratch. This page gets rid of all links and provides the needed markup only.
   $('.btn-close').click(function() {
     $('#myModal').modal('hide');
   });
-}); 
+  }); 
 // Close modal when Esc key is pressed
 $(document).keydown(function(event) {
     if (event.keyCode === 27) {
       $('#myModal').modal('hide');
     }
   });
-
   var myModal = new bootstrap.Modal(document.getElementById('myModal'), {
       keyboard: false
     });
-
-  var openModalBtn = document.querySelector('.btn-primary');
-    openModalBtn.addEventListener('click', function() {
-      myModal.show();
-    });
-
   var closeModalBtn = document.querySelector('.modal .btn-close');
     closeModalBtn.addEventListener('click', function() {
       myModal.hide();
     });
+
+// helper text for GRN
+$(document).ready(function() {
+  $('[data-toggle="GRN-tooltip"]').tooltip({
+    trigger: 'hover',
+    container: 'body',
+    placement: 'top',
+    html: true,
+    title: function() {
+      return $(this).attr('title');
+    }
+  });
+
+  $('.GRN-tooltip').on('mouseenter', function() {
+
+    $('#btn-close-GRN').fadeIn();
+    $('#workOrderCountGRN').fadeIn();
+  });
+  $(document).keydown(function(event) {
+    if (event.keyCode === 27) {
+      $('#workOrderCountGRN').fadeOut();
+      $('#btn-close-GRN').fadeOut();
+    }
+  });
+
+  $('#btn-close-GRN').on('click', function(e) {
+    e.stopPropagation();
+    $('#workOrderCountGRN').fadeOut();
+    $('#btn-close-GRN').fadeOut();
+  });
+
+});
+// end of helper text for GRN
+
+// helper text for MIV
+$(document).ready(function() {
+  $('[data-toggle="MIV-tooltip"]').tooltip({
+    trigger: 'hover',
+    container: 'body',
+    placement: 'top',
+    html: true,
+    title: function() {
+      return $(this).attr('title');
+    }
+  });
+
+  $('.MIV-tooltip').on('mouseenter', function() {
+    $('#btn-close-MIV').fadeIn();
+    $('#workOrderCountMIV').fadeIn();
+  });
+  $(document).keydown(function(event) {
+    if (event.keyCode === 27) {
+      $('#workOrderCountMIV').fadeOut();
+      $('#btn-close-MIV').fadeOut();
+    }
+  });
+  $('.btn-close-MIV').on('click', function(e) {
+    e.stopPropagation();
+    $('#workOrderCountMIV').fadeOut();
+    $('#btn-close-MIV').fadeOut();
+  });
+
+});
+// end of helper text for GRN
+
+
+
 
   $(document).ready(function() {
     $('#inventoryBreakdown').DataTable();
